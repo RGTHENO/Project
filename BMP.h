@@ -1,3 +1,4 @@
+//#include "Image.h"
 #include <iostream> 
 #include <fstream> 
 #include <cstring> // memcpy()  
@@ -18,60 +19,104 @@ int Redondeo(float v) {
   return (int)( (v - floor(v)) < (ceil(v) - v) ? floor(v) : ceil(v));  //FLoor() retorna el minimo entero, y ceil() el maximo entero de "X"
 } 
 
-template<class T> 
-class Matriz {
+
+
+template<class U> 
+class Image
+{
+	
+	  public:
+      
+              int fila; // number of rows
+              int col; // number of columns 
+              U *ptr;
+
+      public:
+      
+             Image(){};
+             Image(int n){ inicializar(n, n); }
+             Image(int m, int n){ inicializar(m, n); }
+             
+             ~Image(){delete ptr;};
+             Image(const Image& oldImage);
+             
+             void inicializar(int m, int n){ //It lets us to initialize our image 
+   
+				 fila = m;
+				 col = n;
+				 ptr = new U[fila * col];
+			 } 
+             //void operator=(const Image&);
+             U Get(int i, int j) { return *(ptr + i*(col)+j); }  //Returns the pixel value of this position i,j
+             void Set(int i, int j, U val)	{ *(ptr + i*(col)+j) = val; }  //Assign a pixel value in the position i,j
+             
+                  
+             //Image operator+(const Image &oldImage);
+             //Image operator-(const Image& oldImage);
+             
+};
+
+
+
+template <class T> 
+class BMP_Image : public Image<T>{
   
 	public:
-	 
+	 /**
 		T *ptr; 
 		int fila, col; 
-		Matriz() {  } 
-		Matriz(int n) { inicializar(n, n); } 
-		Matriz(int m, int n)	{ inicializar(m, n); }
+	**/
+		BMP_Image(){ Image<T>::Image(); } 
+		//BMP_Image(int n) { inicializar(n, n); } 
+		BMP_Image(int n) { Image<T>::Image(n,n); } 
+		
+		//BMP_Image(int m, int n)	{ inicializar(m, n); }
+		BMP_Image(int m, int n)	{ Image<T>::Image(m,n); }
   
+		/**
 		void inicializar(int m, int n) { 
 			fila = m;
 			col = n;
 			ptr = new T[fila * col];
 		} 
+		**/
+		//T Get(int i, int j) { return *(ptr + i*(col)+j); } 
+		//void Set(int i, int j, T val)	{ *(ptr + i*(col)+j) = val; } 
   
-		T Get(int i, int j) { return *(ptr + i*(col)+j); } 
-		void Set(int i, int j, T val)	{ *(ptr + i*(col)+j) = val; } 
-  
-		void Set_Matriz(Matriz<T> mat) 
+		void Set_BMP_Image(BMP_Image<T> mat) 
 		{ 
-			delete ptr; 
+			delete Image<T>::ptr; 
 			inicializar(mat.fila, mat.col); 
-			memcpy(&(ptr[0]), &(mat.ptr[0]), fila*col * sizeof(T)); 
+			memcpy(&(Image<T>::ptr[0]), &(mat.Image<T>::ptr[0]), Image<T>::fila*Image<T>::col * sizeof(T)); 
 		} 
   
-		void Get_Matriz(Matriz<T> *mat) 
+		void Get_BMP_Image(BMP_Image<T> *mat) 
 		{ 
-			if (mat->fila == fila && mat->col == col) 
-			memcpy(&mat->ptr[0], &(ptr[0]), fila*col * sizeof(T)); 
+			if (mat->Image<T>::fila == Image<T>::fila && mat->Image<T>::col == Image<T>::col) 
+			memcpy(&mat->Image<T>::ptr[0], &(Image<T>::ptr[0]), Image<T>::fila*Image<T>::col * sizeof(T)); 
 		} 
   
 		void Imprimir() 
 		{ 
-			for (int i = 0; i < fila; i++) { 
-				for (int j = 0; j < col; j++) 
-					std::cout << ptr[i*col + j]<<" "; 
+			for (int i = 0; i < Image<T>::fila; i++) { 
+				for (int j = 0; j < Image<T>::col; j++) 
+					std::cout << Image<T>::ptr[i*Image<T>::col + j]<<" "; 
 				std::cout << std::endl; 
 			} 
 		} 
   
 		void InvertirPorFilas() { 
 			T *temp; 
-			temp = new T[col]; 
-			for (int i = 0; i < fila/2; i++) 
+			temp = new T[Image<T>::col]; 
+			for (int i = 0; i < Image<T>::fila/2; i++) 
 			{ 
-				memcpy(&(temp[0]), &(ptr[i*col]), col * sizeof(T)); 
-				memcpy(&(ptr[i*col]), &(ptr[(fila-i)*col]), col * sizeof(T)); 
-				memcpy(&(ptr[(fila-i)*col]), &(temp[0]), col * sizeof(T)); 
+				memcpy(&(temp[0]), &(Image<T>::ptr[i*Image<T>::col]), Image<T>::col * sizeof(T)); 
+				memcpy(&(Image<T>::ptr[i*Image<T>::col]), &(Image<T>::ptr[(Image<T>::fila-i)*Image<T>::col]), Image<T>::col * sizeof(T)); 
+				memcpy(&(Image<T>::ptr[(Image<T>::fila-i)*Image<T>::col]), &(temp[0]), Image<T>::col * sizeof(T)); 
 			} 
 		}
 		
-		~Matriz(){ } 
+		~BMP_Image(){Image<T>::~Image(); } 
 }; 
 
 
