@@ -5,10 +5,10 @@ int main(){
 	
 	  Image_Processing test;
 	
-	  test.Load("mandrill.bmp");
+	  test.Load("lena.bmp");
 	  test.Histogram();	 
 	  test.Ecualization();  
-	  test.Save("equa_lena.bmp");
+	  test.Save("output.bmp");
   	
 
 
