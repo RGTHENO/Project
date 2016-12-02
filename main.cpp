@@ -4,12 +4,14 @@ using namespace std;
 
 BMPHeaderFile bmpCA; 
 BMPInfoHeader bmpCI; 
+
+
 BMPColor *bmpPaleta; 
 
-Matriz<BMPColor> mat; 
-Matriz<float> histogramaR; 
-Matriz<float> histogramaG; 
-Matriz<float> histogramaB; 
+BMP_Image <BMPColor> mat; 
+BMP_Image <float> histogramaR; 
+BMP_Image <float> histogramaG; 
+BMP_Image <float> histogramaB; 
 
 void getPalette(char *FileOrigen,int nc) 
 { 
