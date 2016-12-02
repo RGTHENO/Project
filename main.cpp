@@ -1,16 +1,9 @@
-#include<iostream>
-#include "ImageProcessing.h"
+#include<iostream> 
+#include "Facade.h"
 
 int main(){
-	
-	  Image_Processing test;
-	
-	  test.Load("lena.bmp");
-	  test.Histogram();	 
-	  test.Ecualization();  
-	  test.Save("output.bmp");
-  	
-
+	  
+	  Facade test("lena.bmp");
 
 	return 0;
 }
