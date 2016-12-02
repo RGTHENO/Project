@@ -1,4 +1,6 @@
-//#include "Image.h"
+#ifndef __BMP_H__
+#define __BMP_H__
+
 #include <iostream> 
 #include <fstream> 
 #include <cstring> // memcpy()  
@@ -44,15 +46,11 @@ class Image
 				 fila = m;
 				 col = n;
 				 ptr = new U[fila * col];
-			 } 
-             //void operator=(const Image&);
+			 }  
              U Get(int i, int j) { return *(ptr + i*(col)+j); }  //Returns the pixel value of this position i,j
              void Set(int i, int j, U val)	{ *(ptr + i*(col)+j) = val; }  //Assign a pixel value in the position i,j
              
-                  
-             //Image operator+(const Image &oldImage);
-             //Image operator-(const Image& oldImage);
-             
+                   
 };
 
 
@@ -61,10 +59,7 @@ template <class T>
 class BMP_Image : public Image<T>{
   
 	public:
-	 /**
-		T *ptr; 
-		int fila, col; 
-	**/
+	 
 		BMP_Image():Image<T>(){} 
 		//BMP_Image(int n) { inicializar(n, n); } 
 		BMP_Image(int n):Image<T>(n,n){ } 
@@ -72,16 +67,7 @@ class BMP_Image : public Image<T>{
 		//BMP_Image(int m, int n)	{ inicializar(m, n); }
 		BMP_Image(int m, int n):Image<T>(m,n){ }
   
-		/**
-		void inicializar(int m, int n) { 
-			fila = m;
-			col = n;
-			ptr = new T[fila * col];
-		} 
-		**/
-		//T Get(int i, int j) { return *(ptr + i*(col)+j); } 
-		//void Set(int i, int j, T val)	{ *(ptr + i*(col)+j) = val; } 
-  
+		 
 		void Set_BMP_Image(BMP_Image<T> mat) 
 		{ 
 			delete Image<T>::ptr; 
@@ -257,8 +243,6 @@ class BMPInfoHeader
 	    std::cout << "Tamaño Imagen      : " << GetTamanioImagen() << std::endl; 
 	    std::cout << "X pixel por M      : " << GetXPixelPorM() << std::endl; 
 	    std::cout << "Y pixel por M      : " << GetYPixelPorM() << std::endl; 
-	    std::cout << "Colores usados     : " << GetColoresUsados() << std::endl; 
-	    std::cout << "Colores importantes: " << GetColoresImportantes() << std::endl;		 
 	  } 
 }; 
 
@@ -318,3 +302,5 @@ int BMPColor::operator == (const BMPColor &bmpc)
     } 
   return 0; 
 } 
+
+#endif
