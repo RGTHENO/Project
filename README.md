@@ -1,6 +1,6 @@
 Mi Proyecto "EQUALIZANDO UNA IMAGEN .BMP"
 
-EL objetivo de esta aplicación es resaltar los contornos a una imagen,
+EL objetivo de esta aplicación es resaltar el contraste de una imagen,
 cuyo formato es BMP, este archivo puede ser de 1,8,16 y de 24 bits.
 
 Para compilar este programa deberá bajar los archivos BMP.h, ImageProcessing.h y main.cpp. y una imagen
