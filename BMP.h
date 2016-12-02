@@ -30,14 +30,13 @@ class Image
               int fila; // number of rows
               int col; // number of columns 
               U *ptr;
-
-      public:
+ 
       
              Image(){};
              Image(int n){ inicializar(n, n); }
              Image(int m, int n){ inicializar(m, n); }
              
-             ~Image(){delete ptr;};
+             ~Image(){};
              Image(const Image& oldImage);
              
              void inicializar(int m, int n){ //It lets us to initialize our image 
@@ -66,12 +65,12 @@ class BMP_Image : public Image<T>{
 		T *ptr; 
 		int fila, col; 
 	**/
-		BMP_Image(){ Image<T>::Image(); } 
+		BMP_Image():Image<T>(){} 
 		//BMP_Image(int n) { inicializar(n, n); } 
-		BMP_Image(int n) { Image<T>::Image(n,n); } 
+		BMP_Image(int n):Image<T>(n,n){ } 
 		
 		//BMP_Image(int m, int n)	{ inicializar(m, n); }
-		BMP_Image(int m, int n)	{ Image<T>::Image(m,n); }
+		BMP_Image(int m, int n):Image<T>(m,n){ }
   
 		/**
 		void inicializar(int m, int n) { 
