@@ -4,7 +4,7 @@ EL objetivo de esta aplicación es resaltar el contraste al tratar de uniformiza
 cuyo formato es BMP, este archivo puede ser de 1,8,16 y de 24 bits.
 
 Para compilar este programa deberá bajar los archivos BMP.h, ImageProcessing.h, Facada.h y main.cpp. y una imagen
-a su gusto, el cual podria lena.bmp
+a su gusto, el cual podria ser lena.bmp
 
 Para compilarlos desde consola debera escribir la siguiente instruccion:
 
